@@ -1,0 +1,26 @@
+[gd_scene load_steps=5 format=3 uid="uid://bwx7t7pesh46u"]
+
+[ext_resource type="Script" path="res://Nodes/Aircraft/Aircraft.gd" id="1_o8ae1"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4j3xi"]
+albedo_color = Color(0.756863, 0.772549, 0.0117647, 1)
+metallic = 0.2
+
+[sub_resource type="PrismMesh" id="PrismMesh_6qlb5"]
+material = SubResource("StandardMaterial3D_4j3xi")
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_lvsna"]
+height = 1.41769
+
+[node name="Aircraft" type="CharacterBody3D"]
+script = ExtResource("1_o8ae1")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(2.46531e-07, 0.866926, -8.2149e-10, 0, 1.29182e-08, 0.0529784, 1.87999, -1.13684e-07, 1.07725e-16, 0, 0, 0)
+mesh = SubResource("PrismMesh_6qlb5")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_lvsna")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -2, 0.2, 0)
