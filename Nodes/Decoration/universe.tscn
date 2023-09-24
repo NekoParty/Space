@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://3mfe56kyxrm6"]
+[gd_scene load_steps=20 format=3 uid="uid://3mfe56kyxrm6"]
 
 [ext_resource type="Texture2D" uid="uid://cpyydyvtqrp0n" path="res://Assets/Texture/Planet/Earth_Day.jpg" id="1_cj6pl"]
 [ext_resource type="Shader" path="res://Assets/Shader/earth.gdshader" id="1_j6blg"]
@@ -8,7 +8,6 @@
 [ext_resource type="Texture2D" uid="uid://de545o2vmkro5" path="res://Assets/Texture/Planet/Earth_Night.jpg" id="3_3ve36"]
 [ext_resource type="Texture2D" uid="uid://bcsc6nco55t4h" path="res://Assets/Texture/Planet/Earth_Norm.jpg" id="4_y34c8"]
 [ext_resource type="Texture2D" uid="uid://fgdk2rx65xnw" path="res://Assets/Texture/Planet/Earth_Spec.jpg" id="5_hxq46"]
-[ext_resource type="Shader" path="res://Assets/Shader/sun_lens_flare.gdshader" id="8_lc76r"]
 [ext_resource type="Texture2D" uid="uid://qub0sdi3sgkt" path="res://Assets/Texture/Particle/star_02.png" id="9_2p101"]
 [ext_resource type="Texture2D" uid="uid://5ia2135f8xu8" path="res://Assets/Texture/Planet/Universe.jpg" id="10_ohrfj"]
 
@@ -42,7 +41,7 @@ shader_parameter/beta_mie = Vector3(1, 1, 1)
 shader_parameter/beta_ambient = Vector3(0, 0, 0)
 shader_parameter/beta_e = 0.0
 shader_parameter/g = 0.8
-shader_parameter/height_ray = 3.0
+shader_parameter/height_ray = 2.0
 shader_parameter/height_mie = 0.25
 shader_parameter/density_multiplier = 1.0
 shader_parameter/steps_i = 32
@@ -75,19 +74,9 @@ glow_strength = 2.0
 glow_blend_mode = 0
 glow_hdr_threshold = 4.0
 
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_1o0q7"]
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_xodpe"]
-noise = SubResource("FastNoiseLite_1o0q7")
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_k6pd4"]
-shader = ExtResource("8_lc76r")
-shader_parameter/sun_position = Vector2(0, 0)
-shader_parameter/tint = Vector3(2.8, 2.4, 2)
-shader_parameter/noise_texture = SubResource("NoiseTexture2D_xodpe")
-
-[node name="Universe" type="Node3D"]
+[node name="Universe" type="Node3D" node_paths=PackedStringArray("target_camera")]
 script = ExtResource("1_n5k1u")
+target_camera = NodePath("Camera3D")
 
 [node name="Earth" type="MeshInstance3D" parent="."]
 mesh = SubResource("SphereMesh_kk6i5")
@@ -106,12 +95,6 @@ mesh = SubResource("QuadMesh_ay4tc")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_uwcci")
-
-[node name="Lens" type="ColorRect" parent="."]
-material = SubResource("ShaderMaterial_k6pd4")
-offset_right = 4270.0
-offset_bottom = 2136.0
-color = Color(0, 0, 0, 1)
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(-0.595917, 0.229609, -0.769521, -3.72529e-09, 0.958253, 0.285923, 0.803046, 0.170386, -0.571039, -728.908, 256.824, -297.484)

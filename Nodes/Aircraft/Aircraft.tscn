@@ -1,26 +1,71 @@
-[gd_scene load_steps=5 format=3 uid="uid://bwx7t7pesh46u"]
+[gd_scene load_steps=6 format=3 uid="uid://bwx7t7pesh46u"]
 
-[ext_resource type="Script" path="res://Nodes/Aircraft/Aircraft.gd" id="1_o8ae1"]
+[ext_resource type="Script" path="res://Nodes/Aircraft/aircraft.gd" id="1_vs08q"]
+[ext_resource type="Texture2D" uid="uid://cndax40pxsekl" path="res://Assets/Texture/System/Range.png" id="2_a7tow"]
+[ext_resource type="Texture2D" uid="uid://cuydv6akss4mi" path="res://Assets/Texture/System/Crosshair.png" id="3_p6muj"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4j3xi"]
-albedo_color = Color(0.756863, 0.772549, 0.0117647, 1)
-metallic = 0.2
-
-[sub_resource type="PrismMesh" id="PrismMesh_6qlb5"]
-material = SubResource("StandardMaterial3D_4j3xi")
+[sub_resource type="BoxMesh" id="BoxMesh_64ur7"]
+size = Vector3(1, 0.5, 1)
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_lvsna"]
 height = 1.41769
 
 [node name="Aircraft" type="CharacterBody3D"]
-script = ExtResource("1_o8ae1")
+script = ExtResource("1_vs08q")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(2.46531e-07, 0.866926, -8.2149e-10, 0, 1.29182e-08, 0.0529784, 1.87999, -1.13684e-07, 1.07725e-16, 0, 0, 0)
-mesh = SubResource("PrismMesh_6qlb5")
+[node name="PlaneMesh" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+mesh = SubResource("BoxMesh_64ur7")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("CapsuleShape3D_lvsna")
 
-[node name="Camera3D" type="Camera3D" parent="."]
+[node name="Camera" type="Camera3D" parent="."]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -2, 0.2, 0)
+fov = 90.0
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Range" type="TextureRect" parent="Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -500.0
+offset_top = -500.0
+offset_right = 500.0
+offset_bottom = 500.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_a7tow")
+
+[node name="Crosshair" type="TextureRect" parent="Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -100.0
+offset_top = -100.0
+offset_right = 100.0
+offset_bottom = 100.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_p6muj")
+
+[node name="Front" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0)
+
+[node name="Left" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)

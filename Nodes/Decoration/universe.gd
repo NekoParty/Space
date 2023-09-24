@@ -1,5 +1,6 @@
 extends Node3D
 
+@export var target_camera:Camera3D
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -8,5 +9,4 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	var sun_position = $Camera3D.unproject_position($Atmosphere/SunMesh.global_position)
-	$Lens.material.set_shader_parameter("sun_position",sun_position)
+	pass
