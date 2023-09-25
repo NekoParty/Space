@@ -26,7 +26,6 @@ player = NodePath("Aircraft")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -35.0047, 0, 676.5)
 
 [node name="MainCamera" type="Camera3D" parent="."]
-current = true
 fov = 80.0
 
 [node name="Lens" type="ColorRect" parent="."]

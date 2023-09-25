@@ -9,12 +9,17 @@ var mouse_sensitivity = 70;#鼠标灵敏度
 @onready var camera: Camera3D = $Camera
 
 @onready var plane_mesh = $PlaneMesh
+@onready var rotation_reference = $RotReference
 
+@onready var animation_player = $AnimationPlayer
 
 @onready var crosshair = $Control/Crosshair
 var crosshair_speed = 0.5
 var crosshair_speed_max = 1000.0
 var crosshair_velocity = Vector2.ZERO
+
+var spinning_speed = 0
+var spinning_speed_max = 24
 
 var vertical_rot_speed_max = 1
 var vertical_rot_accel = 2
@@ -44,15 +49,15 @@ func _process(delta: float) -> void:
 	else:
 		crosshair.position = targ_pos
 	
-	var dir=(transform.basis*Vector3(speed,0,0)).normalized()
-	velocity=dir*speed#根据当前的rotation计算速度。因为rotation不断变化，所以基本上计算速度都要考虑transform.basis
+	var dir = (transform.basis*Vector3(speed,0,0)).normalized()
+	velocity = dir*speed      #根据当前的rotation计算速度。因为rotation不断变化，所以基本上计算速度都要考虑transform.basis
 	
-	var speed_add=Input.get_axis("backward","forward");#加速度和减速
+	var speed_add = Input.get_axis("backward","forward");#加速度和减速
 	if speed_add>0:#加速
-		speed+=pos_ACCELERATION*delta;
+		speed += pos_ACCELERATION*delta;
 		camera.fov = lerp(camera.fov,100.0,delta*5)
 	elif speed_add<0 and speed>0:#不知道能不能后退，此处先不允许后退
-		speed+=neg_ACCELERATION*delta;
+		speed += neg_ACCELERATION*delta;
 		camera.fov = lerp(camera.fov,70.0,delta*5)
 	else:
 		camera.fov = lerp(camera.fov,80.0,delta*5)
@@ -77,9 +82,21 @@ func _process(delta: float) -> void:
 	if is_zero_approx(angle_hor):
 		horizontal_rot_speed = move_toward(horizontal_rot_speed,0,horizontal_rot_accel * delta)
 	rotate($Front.global_position - global_position,horizontal_rot_speed * delta)
+	
+	# 横向旋转机动
 		
-
-	#camera.look_at(position,Vector3(0,1,0),false)#始终能看着飞机，可以试试注释这一行，是2两个视觉效果，但是明显注释掉更好一点
+	plane_mesh.rotation.x += rotation_reference.rotation.x
+	if not animation_player.is_playing():
+		if Input.is_action_just_pressed("dodgeL"):
+			animation_player.play("SpinL")
+			spinning_speed = spinning_speed_max
+		if Input.is_action_just_pressed("dodgeR"):
+			animation_player.play("SpinR")
+			spinning_speed = -spinning_speed_max
+	
+	velocity += ($Left.global_position - global_position) * spinning_speed
+	
+	spinning_speed = move_toward(spinning_speed,0,spinning_speed_max / 0.6 *delta)
 	
 	move_and_slide()
 	
