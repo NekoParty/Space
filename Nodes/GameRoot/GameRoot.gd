@@ -5,7 +5,7 @@ enum GameSceneIndex {MAINMENU, SPACE}
 
 var saved_scene_path = {
 	GameSceneIndex.MAINMENU: "res://Nodes/MainMenu/MainMenu.tscn",
-#	GameSceneIndex.SPACE: ""
+	GameSceneIndex.SPACE: "res://Nodes/Space/Space.tscn"
 }
 
 var scenes = {}
@@ -40,7 +40,7 @@ func change_scene(target_scene_index: int, keep_scene: = false, _msg := {}):
 				_scene.queue_free()
 	
 	#添加到树
-	Global.current_gamescene = scene
+	Global.current_game_scene = scene
 	self.add_child(scene)
 	#传递参数
 	scene.enter(_msg)

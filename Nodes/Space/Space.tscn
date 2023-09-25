@@ -1,0 +1,44 @@
+[gd_scene load_steps=7 format=3 uid="uid://b6u47jfy5latn"]
+
+[ext_resource type="Script" path="res://Nodes/Space/Space.gd" id="1_vj74w"]
+[ext_resource type="Script" path="res://Nodes/Space/Player.gd" id="2_ylmvc"]
+[ext_resource type="PackedScene" uid="uid://befevurdqi4tw" path="res://Nodes/Vehicles/PrototypeShip/PrototypeShip.tscn" id="3_dah7d"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_x8o81"]
+sky_top_color = Color(0, 0, 0, 1)
+sky_horizon_color = Color(0.635294, 0.811765, 0.964706, 1)
+sky_curve = 0.011362
+ground_bottom_color = Color(0.219608, 0.396078, 0.564706, 1)
+ground_horizon_color = Color(0.635294, 0.811765, 0.964706, 1)
+ground_curve = 0.0696441
+sun_curve = 0.0395645
+
+[sub_resource type="Sky" id="Sky_te5x6"]
+sky_material = SubResource("ProceduralSkyMaterial_x8o81")
+
+[sub_resource type="Environment" id="Environment_n6rjq"]
+background_mode = 2
+sky = SubResource("Sky_te5x6")
+
+[node name="Space" type="Node3D"]
+script = ExtResource("1_vj74w")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_n6rjq")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="WorldEnvironment"]
+transform = Transform3D(1, 0, 0, 0, -0.965926, 0.258819, 0, -0.258819, -0.965926, 0, 0, 0)
+light_energy = 2.0
+light_indirect_energy = 0.0
+light_volumetric_fog_energy = 0.0
+light_angular_distance = 0.5
+
+[node name="Player" type="Node3D" parent="." node_paths=PackedStringArray("vehicle")]
+script = ExtResource("2_ylmvc")
+vehicle = NodePath("../Vehicles/PrototypeShip")
+
+[node name="Camera" type="Camera3D" parent="Player"]
+
+[node name="Vehicles" type="Node3D" parent="."]
+
+[node name="PrototypeShip" parent="Vehicles" instance=ExtResource("3_dah7d")]

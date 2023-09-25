@@ -47,7 +47,7 @@ shader_parameter/density_multiplier = 1.0
 shader_parameter/steps_i = 32
 shader_parameter/steps_l = 4
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_h8d4a"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_aqtr8"]
 blend_mode = 1
 shading_mode = 0
 albedo_color = Color(1, 0.865, 0.82, 1)
@@ -55,7 +55,7 @@ albedo_texture = ExtResource("9_2p101")
 billboard_mode = 1
 
 [sub_resource type="QuadMesh" id="QuadMesh_ay4tc"]
-material = SubResource("StandardMaterial3D_h8d4a")
+material = SubResource("StandardMaterial3D_aqtr8")
 size = Vector2(500, 500)
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_t2o71"]

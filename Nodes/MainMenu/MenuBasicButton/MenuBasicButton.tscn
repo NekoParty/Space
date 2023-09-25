@@ -1,0 +1,4 @@
+[gd_scene format=3 uid="uid://cyxnnx8e6ni50"]
+
+[node name="MenuBasicButton" type="Button"]
+custom_minimum_size = Vector2(256, 64)

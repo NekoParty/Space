@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://caftajxvt3643"]
+[gd_scene load_steps=3 format=3 uid="uid://caftajxvt3643"]
 
 [ext_resource type="Script" path="res://Nodes/MainMenu/MainMenu.gd" id="1_2yalq"]
+[ext_resource type="PackedScene" uid="uid://cyxnnx8e6ni50" path="res://Nodes/MainMenu/MenuBasicButton/MenuBasicButton.tscn" id="2_ptc3f"]
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
@@ -10,3 +11,21 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_2yalq")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+offset_top = 474.0
+offset_right = 256.0
+offset_bottom = 606.0
+grow_vertical = 2
+
+[node name="SpaceButton" parent="VBoxContainer" instance=ExtResource("2_ptc3f")]
+layout_mode = 2
+text = "Play"
+
+[node name="OptionButton" parent="VBoxContainer" instance=ExtResource("2_ptc3f")]
+layout_mode = 2
+text = "Option"
+
+[connection signal="pressed" from="VBoxContainer/SpaceButton" to="." method="_on_space_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/OptionButton" to="." method="_on_option_button_pressed"]

@@ -1,0 +1,53 @@
+[gd_scene load_steps=8 format=3 uid="uid://b27hb4nrfst3p"]
+
+[ext_resource type="Script" path="res://Nodes/Space/SpaceEnvironment/SpaceEnvironment.gd" id="1_ejpf2"]
+[ext_resource type="PackedScene" uid="uid://ba278optaawj3" path="res://Nodes/Space/SpaceBackground/SpaceBackground.tscn" id="3_ga3ip"]
+
+[sub_resource type="Shader" id="Shader_kcdww"]
+code = "
+// NOTE: Shader automatically converted from Godot Engine 4.1.1.stable's PanoramaSkyMaterial.
+
+shader_type sky;
+
+uniform sampler2D source_viewport : filter_linear, source_color, hint_default_black;
+
+void sky() {
+	vec4 viewport_color = texture(source_viewport, SCREEN_UV);
+	COLOR = viewport_color.rgb;
+}
+"
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_p5pmt"]
+viewport_path = NodePath("SubViewportContainer/SubViewport")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_58j6c"]
+resource_local_to_scene = true
+shader = SubResource("Shader_kcdww")
+shader_parameter/source_viewport = SubResource("ViewportTexture_p5pmt")
+
+[sub_resource type="Sky" id="Sky_5lxwn"]
+sky_material = SubResource("ShaderMaterial_58j6c")
+
+[sub_resource type="Environment" id="Environment_87alu"]
+background_mode = 2
+sky = SubResource("Sky_5lxwn")
+
+[node name="SpaceEnvironment" type="WorldEnvironment"]
+environment = SubResource("Environment_87alu")
+script = ExtResource("1_ejpf2")
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch = true
+
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
+own_world_3d = true
+handle_input_locally = false
+size = Vector2i(1920, 1080)
+render_target_update_mode = 4
+
+[node name="SpaceBackground" parent="SubViewportContainer/SubViewport" instance=ExtResource("3_ga3ip")]

@@ -1,7 +1,9 @@
 extends GameScene
 
-func _ready():
-	pass # Replace with function body.
 
-func _process(delta):
-	pass
+func _on_space_button_pressed():
+	root.change_scene(GameRoot.GameSceneIndex.SPACE)
+
+
+func _on_option_button_pressed():
+	pass # Replace with function body.

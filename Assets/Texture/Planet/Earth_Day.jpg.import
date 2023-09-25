@@ -15,7 +15,7 @@ dest_files=["res://.godot/imported/Earth_Day.jpg-b406820d26521fec628bd3f52cea397
 
 [params]
 
-compress/mode=0
+compress/mode=3
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/hdr_compression=1
