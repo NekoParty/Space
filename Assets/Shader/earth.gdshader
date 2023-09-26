@@ -10,7 +10,7 @@ uniform sampler2D spec_map;
 
 uniform sampler2D cloud_map;
 
-uniform float rotation_speed = 0.001;
+uniform float rotation_speed = 0.0;
 
 
 void fragment() {

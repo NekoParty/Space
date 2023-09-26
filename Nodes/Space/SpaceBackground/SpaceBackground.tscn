@@ -31,7 +31,7 @@ height = 100.0
 render_priority = 0
 shader = ExtResource("1_0vrky")
 shader_parameter/emission_strength = 1.0
-shader_parameter/rotation_speed = 0.001
+shader_parameter/rotation_speed = 0.0
 shader_parameter/albedo_day = ExtResource("2_g1l56")
 shader_parameter/albedo_night = ExtResource("3_vwtjr")
 shader_parameter/normal_map = ExtResource("5_h24tk")
@@ -77,22 +77,24 @@ script = ExtResource("1_lo23d")
 environment = SubResource("Environment_h2iws")
 
 [node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 95, 0, 0)
 current = true
 
-[node name="Earth" type="MeshInstance3D" parent="."]
-transform = Transform3D(-0.866025, 0, -0.5, 0, 1, 0, 0.5, 0, -0.866025, 53, 0, 0)
+[node name="SolarSystem" type="Node3D" parent="."]
+
+[node name="Earth" type="MeshInstance3D" parent="SolarSystem"]
 mesh = SubResource("SphereMesh_q7if3")
-skeleton = NodePath("../..")
+skeleton = NodePath("../../..")
 surface_material_override/0 = SubResource("ShaderMaterial_uq1c7")
 
-[node name="Atmosphere" type="MeshInstance3D" parent="Earth"]
-transform = Transform3D(1, 0, 0, 0, 0.983258, 0.182218, 0, -0.182218, 0.983258, 0, 0, 0)
+[node name="Atmosphere" type="MeshInstance3D" parent="SolarSystem"]
+transform = Transform3D(1, 0, 0, 0, 0.917755, 0.397148, 0, -0.397148, 0.917754, 0, 0, 0)
 mesh = SubResource("BoxMesh_6agvq")
 skeleton = NodePath("../../..")
 surface_material_override/0 = SubResource("ShaderMaterial_pgwkd")
 
-[node name="Sun" type="DirectionalLight3D" parent="Earth/Atmosphere"]
+[node name="Sun" type="DirectionalLight3D" parent="SolarSystem/Atmosphere"]
 
-[node name="SunMesh" type="MeshInstance3D" parent="Earth/Atmosphere"]
+[node name="SunMesh" type="MeshInstance3D" parent="SolarSystem/Atmosphere"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 300)
 mesh = SubResource("QuadMesh_2lxmy")
