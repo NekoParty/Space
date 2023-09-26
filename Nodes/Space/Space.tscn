@@ -1,8 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://b6u47jfy5latn"]
+[gd_scene load_steps=9 format=3 uid="uid://b6u47jfy5latn"]
 
 [ext_resource type="Script" path="res://Nodes/Space/Space.gd" id="1_vj74w"]
 [ext_resource type="Script" path="res://Nodes/Space/Player.gd" id="2_ylmvc"]
 [ext_resource type="PackedScene" uid="uid://befevurdqi4tw" path="res://Nodes/Vehicles/PrototypeShip/PrototypeShip.tscn" id="3_dah7d"]
+[ext_resource type="Texture2D" uid="uid://cndax40pxsekl" path="res://Assets/Texture/System/Range.png" id="3_pruc6"]
+[ext_resource type="Texture2D" uid="uid://cuydv6akss4mi" path="res://Assets/Texture/System/Crosshair.png" id="4_d65bk"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_x8o81"]
 sky_top_color = Color(0, 0, 0, 1)
@@ -38,6 +40,46 @@ script = ExtResource("2_ylmvc")
 vehicle = NodePath("../Vehicles/PrototypeShip")
 
 [node name="Camera" type="Camera3D" parent="Player"]
+
+[node name="Control" type="Control" parent="Player"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Range" type="TextureRect" parent="Player/Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -500.0
+offset_top = -500.0
+offset_right = 500.0
+offset_bottom = 500.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_pruc6")
+
+[node name="Crosshair" type="TextureRect" parent="Player/Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -100.0
+offset_top = -100.0
+offset_right = 100.0
+offset_bottom = 100.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_d65bk")
 
 [node name="Vehicles" type="Node3D" parent="."]
 

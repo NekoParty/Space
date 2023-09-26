@@ -37,7 +37,7 @@ var turing_time = 1
 #飞机始终沿x轴移动，只改变rotation
 #？认真的吗
 func _ready() -> void:
-	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)#隐藏鼠标
+	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED) #隐藏鼠标
 	pass
 
 func _process(delta: float) -> void:

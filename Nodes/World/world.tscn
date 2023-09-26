@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://3mfe56kyxrm6" path="res://Nodes/Decoration/universe.tscn" id="1_1bwcb"]
 [ext_resource type="Script" path="res://Nodes/World/world.gd" id="1_iglcs"]
-[ext_resource type="PackedScene" uid="uid://bwx7t7pesh46u" path="res://Nodes/Aircraft/Aircraft.tscn" id="2_o7n8j"]
+[ext_resource type="PackedScene" uid="uid://bwx7t7pesh46u" path="res://Nodes/Aircraft/aircraft.tscn" id="2_o7n8j"]
 [ext_resource type="Shader" path="res://Assets/Shader/sun_lens_flare.gdshader" id="4_ohvul"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_ryxp5"]
